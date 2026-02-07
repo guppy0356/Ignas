@@ -1,8 +1,8 @@
 import { memo } from 'react'
 
-const MemoizedChild = memo(function MemoizedChild({ label }: { label: string }) {
+const MemoizedChild = memo(function MemoizedChild({ label, onClick }: { label: string; onClick: () => void }) {
   console.log('MemoizedChild rendered')
-  return <p>{label}</p>
+  return <p onClick={onClick}>{label}</p>
 })
 
 export default MemoizedChild
