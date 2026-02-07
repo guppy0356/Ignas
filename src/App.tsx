@@ -1,34 +1,27 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import NormalChild from './NormalChild'
+import MemoizedChild from './MemoizedChild'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [memoLabel, setMemoLabel] = useState('I am memoized child')
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div style={{ padding: '2rem' }}>
+      <h1>React.memo デモ</h1>
+      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+        <button onClick={() => setCount(c => c + 1)}>
+          count: {count}（props 変わらない）
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <button onClick={() => setMemoLabel(l => l === 'I am memoized child' ? 'label changed!' : 'I am memoized child')}>
+          label を切り替え（props 変わる）
+        </button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <h2>memo なし</h2>
+      <NormalChild label="I am normal child" />
+      <h2>memo あり</h2>
+      <MemoizedChild label={memoLabel} />
+    </div>
   )
 }
 
